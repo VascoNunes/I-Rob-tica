@@ -15,7 +15,7 @@ class turtlebotSwitchState(object):
         rospy.loginfo('Turtle bot switch state started !')
         rospy.Subscriber('teste/State', State, self.changeState)
         self.pub_cmd_vel = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
-        self.state = 3
+        self.state = 0
 
        
         
@@ -30,13 +30,14 @@ class turtlebotSwitchState(object):
                 elif (self.state == 2):
                     self.rotate_left()
 
-                print(self.state)
-
+        
                 rospy.sleep(0.1)
             except rospy.ROSInterruptException:
                 break
 
     def changeState(self, msg):
+
+        print('New state:', msg.state)
         self.state = msg.state
 
 
